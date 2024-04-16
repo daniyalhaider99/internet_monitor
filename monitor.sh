@@ -29,7 +29,7 @@ while true; do
     # Check if the response is 0 (unresponsive)
     if [ "$response" -eq 0 ]; then
         consecutive_failures=$((consecutive_failures + 1))
-        if [ $consecutive_failures -eq 5 ]; then
+        if [ $consecutive_failures -eq 3 ]; then
             send_discord_message "Office Internet is down!"
         fi
     elif [ "$response" -gt 0 ] && [ "$response" -lt 5 ]; then
