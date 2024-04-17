@@ -30,13 +30,13 @@ while true; do
     if [ "$response" -eq 0 ]; then
         consecutive_failures=$((consecutive_failures + 1))
         if [ $consecutive_failures -eq 3 ]; then
-            send_discord_message "Office Internet is down!"
+            send_discord_message "Office Internet is down! <@&1230087956266483782>"
         fi
     elif [ "$response" -gt 0 ] && [ "$response" -lt 5 ]; then
-        send_discord_message "Office Internet is slow!\nPing: $avg_ping ms"
+        send_discord_message "Office Internet is slow!\nPing: $avg_ping ms\n<@&1230087956266483782>"
     else
         if [ $consecutive_failures -ge 1 ]; then
-            send_discord_message "Office Internet is up again!\nPing: $avg_ping ms"
+            send_discord_message "Office Internet is up again!\nPing: $avg_ping ms\n<@&1230087956266483782>"
         fi
         consecutive_failures=0
     fi
