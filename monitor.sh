@@ -1,7 +1,7 @@
 # Function to send message to Discord
 send_discord_message() {
 	local message="$1"
-	local webhook_url=https://discord.com/api/webhooks/1229713091294396468/429shpsHD5KCkSrIVFKFtkJWv-v61k6t5bswjv6yNOabNg16c_wuBnhqVkRlXKc_M8xI
+	local webhook_url=<discord_webhook_url>
 	curl -X POST -H 'Content-type: application/json' --data "{\"content\":\"$message\"}" $webhook_url    
 }
 
@@ -15,7 +15,7 @@ ping_ip() {
 }
 
 # Initialize variables
-ip="124.29.217.11"
+ip="" # Fill IP to ping
 consecutive_failures=0
 
 # Main loop
@@ -29,10 +29,10 @@ while true; do
 	if [ "$response" -eq 0 ]; then
 		consecutive_failures=$((consecutive_failures + 1))
 		if [ $consecutive_failures -eq 3 ]; then
-				send_discord_message "Office Internet is down! <@&1230087956266483782>"
+				send_discord_message "Internet is down! <@&1230087956266483782>"
 		fi
 	elif [ "$response" -gt 0 ] && [ "$response" -lt 5 ]; then
-		send_discord_message "Office Internet is slow!\nPing: $avg_ping ms\n<@&1230087956266483782>"
+		send_discord_message "Internet is slow!\nPing: $avg_ping ms\n<@&1230087956266483782>"
 	else
 		if [ $consecutive_failures -ge 1 ]; then
 				send_discord_message "Office Internet is up again!\nPing: $avg_ping ms\n<@&1230087956266483782>"
